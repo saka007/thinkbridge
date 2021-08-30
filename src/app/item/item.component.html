@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Data Management</h1>
+  <div class="row">
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xs-12">
+      <table class="table table-striped">
+        <thead class="thead">
+          <tr>
+            <th>ID</th>
+            <th>Item Number</th>
+            <th>Item Amount</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+
+        <tr *ngFor="let item of items">
+          <td>{{ item.id }}</td>
+          <td>{{ item.number }}</td>
+          <td>{{ item.amount }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="selectItem(item)">Update</button>
+            <button class="btn btn-danger" (click)="deleteItem(item.id)">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">
+      <h2> Item Form </h2>
+      <form #f="ngForm" (ngSubmit)="f.form.valid && createOrUpdateItem(f)">
+        <div class="form-group">
+          <label for="number">Number</label>
+          <input type="text" class="form-control" name="number" [(ngModel)]="selectedItem.number" #number="ngModel" [ngClass]="{ 'is-invalid': f.submitted && number.invalid }" required />
+          <div *ngIf="f.submitted && number.invalid" class="invalid-feedback">
+              <div *ngIf="number.errors.required">number is required</div>
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" class="form-control" name="amount" [(ngModel)] = "selectedItem.amount" #amount="ngModel" [ngClass]="{ 'is-invalid': f.submitted && amount.invalid }" required />
+          <div *ngIf="f.submitted && amount.invalid" class="invalid-feedback">
+              <div *ngIf="amount.errors.required">amount is required</div>
+          </div>
+        </div>
+          
+          <input type="submit" class="btn btn-primary" value="Create or Update Item">
+        </form> 
+    </div>
+  </div>  
+</div>

@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "http://api.paybeingz.com",
+        "logLevel": "debug",
+        "secure": true,
+	    "changeOrigin": true
+    }
+}
